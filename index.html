@@ -73,7 +73,7 @@
                     normalText();
                     processing.fill(191, 88, 88);
                     rect(20, 0, 360, 400);
-                    processing.image(processing.getImage("creatures/OhNoes"), 129, 127);
+                    processing.image(loadImage("/sad.png"), 129, 127);
                     processing.fill(255, 250, 250);
                     processing.textSize(35);
                     processing.text("GAME OVER", 200, 310);
@@ -120,7 +120,7 @@
                     // Part 2: HEART DROP
 
                     for (var j = 0; j < heartX.length; j++) {
-                        processing.image(processing.getImage("space/healthheart"), heartX[j], heartY[j], 15, 15);
+                        processing.image(loadImage("/heart.png"), heartX[j], heartY[j], 15, 15);
                         heartY[j] += 5 + j * 0.5;
                         if (outsideUmbrella(heartX[j], mouseX)) {
                             // If a heart reaches the bottom, heart goes back to the top, the user loses Heart point.
@@ -136,7 +136,7 @@
                         }
                     }
                     // Other elements
-                    processing.image(processing.getImage("avatars/avatar-team"), 116, 255, 240, 120);
+                    processing.image(loadImage("/Team.png"), 116, 255, 240, 120);
                     processing.fill(232, 79, 79);
                     //umbrella moves with the mouse
                     processing.rect(mouseX, mouseY, 240, 30);
@@ -174,7 +174,7 @@
             processing.textSize(42);
             processing.text("Under my Umbrella", 200, 80);
             // the team
-            processing.image(processing.getImage("avatars/avatar-team"), 102, 140);
+            processing.image(loadImage("/Team.png"), 102, 140);
             // Game rule
             processing.textSize(14);
             fancyText();
