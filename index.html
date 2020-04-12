@@ -17,7 +17,7 @@
         */
         var umbrella = function (processing) {
             var toggle = false;
-            var f = processing.createFont("fantasy");
+            var f = processing.loadFont("animeace.ttf");
             processing.textFont(f);
             // rain position
             var xPositions = [200];
@@ -32,11 +32,11 @@
             var time = 0;
             var fancyText = function () {
                 processing.fill(72, 93, 156);
-                f = processing.createFont("cursive");
+                f = processing.loadFont("type-font.ttf");
                 processing.textFont(f);
             };
             var normalText = function () {
-                f = processing.createFont("fantasy");
+                f = processing.loadFont("animeace.ttf");
                 processing.textFont(f);
                 processing.fill(237, 35, 193);
             };
@@ -44,17 +44,17 @@
 
             // draw rain
             for (var numberdrop = 0; numberdrop < 100; numberdrop++) {
-                xPositions.push(20 * random(0, 20));
-                yPositions.push(0 + 20 * random(0, 20));
-                defColor.push(processing.color(random(0, 225), random(0, 225), random(0, 225)));
-                speed.push(random(5, 7));
+                xPositions.push(20 * processing.random(0, 20));
+                yPositions.push(0 + 20 * processing.random(0, 20));
+                defColor.push(processing.color(processing.random(0, 225), processing.random(0, 225), processing.random(0, 225)));
+                speed.push(processing.random(5, 7));
             }
             // define heart
             var heartnum = 0;
             var decideHeart = function () {
                 while (heartnum < 5) {
-                    heartX.push(50 * floor(random(0, 8)));
-                    heartY.push(50 + 60 * floor(random(60, 100)));
+                    heartX.push(50 * floor(processing.random(0, 8)));
+                    heartY.push(50 + 60 * floor(processing.random(60, 100)));
                     heartnum++;
                 }
             };
@@ -180,7 +180,7 @@
             fancyText();
             processing.text("Try to catch as many heart as you can, \n but at the same time make sure \nyour team stay under your umbrella", 200, 300);
             //Instruction 3
-            f = processing.createFont("fantasy");
+            f = processing.loadFont("animeace.ttf");
             normalText();
             processing.textSize(16);
             processing.text("Press Enter to start/pause the game", 200, 350);
