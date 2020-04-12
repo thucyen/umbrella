@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8">
+    <title>Game: Under My Umbrella</title>
+</head>
+
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js"> </script>
+<script type="text/javascript">
+/* Game: Under My Umbrella
+It's rainy outside but it's also full of love. 
+Your tool is a magic umbrella. Your task is to catch all hearts and to protect the team under your umbrella. If you break more than 20 hearts, they will be heart-broken. If they catch too much rain, they will get a cold. 
+Move the umbrella with your mouse! Good luck!
+*/
+var toggle = false;
+var f = createFont("fantasy");
+textFont(f);
+// rain position
+var xPositions = [200];
+var yPositions = [0];
+var defColor = [color(255, 0, 0)];
+var speed = [5];
+// heart position
+var heartX = [30];
+var heartY = [20];
+var heartBroken = 0;
+var getCold = 0;
+var time = 0;
+var fancyText = function () {
+fill(72, 93, 156);
+f = createFont("cursive");
+textFont(f);
+};
+var normalText = function () {
+f = createFont("fantasy");
+textFont(f);
+fill(237, 35, 193);
+};
+
+
+// draw rain
+for (var numberdrop = 0; numberdrop <100; numberdrop ++) {
+    xPositions.push(20*random(0,20));
+    yPositions.push(0+20*random(0,20));
+    defColor.push(color(random(0,225), random(0,225), random(0,225)));
+    speed.push(random(5,7));
+}
+// define heart
+var heartnum = 0;
+var decideHeart= function () {
+while ( heartnum < 5) {
+    heartX.push(50*floor(random(0,8)));
+    heartY.push(50+60*floor(random(60,100)));
+    heartnum ++;
+    }
+};
+decideHeart ();
+
+var outsideUmbrella = function (x,umbrellaX) {
+    return (x < umbrellaX || x > umbrellaX + 240);
+
+};
+
+
+
+var draw = function() {
+    if (!toggle) {
+        return;
+    }
+    // Check if game is over
+    if (heartBroken >=50 && floor(getCold/300) > 100) {
+        normalText();
+        fill(191, 88, 88);
+        rect(20,0,360,400);
+        image(getImage("creatures/OhNoes"), 129, 127);
+        fill (255, 250, 250);
+        textSize(35);
+        text("GAME OVER", 200,310);
+        text("Your score: " + floor(time/1000), 200, 350);
+        textSize(12);
+    }
+    
+    else { background(217, 255, 0);
+    noStroke();
+   
+    // RAIN DROP
+    for (var i = 0; i < xPositions.length; i++) {
+        fill(defColor[i]);
+        ellipse(xPositions[i], yPositions[i], 3, 6);
+        yPositions[i] = yPositions[i] + speed[i];
+        time++;
+        // rain back
+        if (outsideUmbrella(xPositions[i],mouseX)) {
+           //this is the notification that the umbrella is not covering the team from Rain
+           if (xPositions[i]>110 && yPositions[i] > 255 && xPositions[i] <360 & yPositions[i]<375)  {
+            fancyText();
+            textSize(12);
+            text ("We're cold", 200,240);
+           }
+           // losing Cold point
+           if (xPositions[i]>110 && xPositions[i] <360){
+               getCold ++;
+           }
+           // if rain reach the end of the canvas, return to 0
+            if (yPositions[i] > 400) {
+            yPositions[i] = 0;
+            }
+        }
+        //Umbrella effect. If rains meet umbrella, rain goes back to the top of the canvas
+        if (!outsideUmbrella(xPositions[i],mouseX)) {
+            if (yPositions[i] > mouseY) {
+         yPositions[i] = 0;
+        }
+        }
+        
+    }
+    
+    // Part 2: HEART DROP
+    
+     for (var j = 0; j < heartX.length; j++) {
+          image(getImage("space/healthheart"), heartX[j], heartY[j],15, 15);
+         heartY[j] += 5+j*0.5;
+         if (outsideUmbrella(heartX[j],mouseX)) {
+            // If a heart reaches the bottom, heart goes back to the top, the user loses Heart point.
+            if (heartY[j] > 400) {
+            heartBroken ++;
+            heartY[j]=0;
+            }
+         }
+         if (!outsideUmbrella(heartX[j],mouseX)) {
+            if (heartY[j] > mouseY) {
+            heartY[j]=0;
+            }
+         }
+     }
+    // Other elements
+    image(getImage("avatars/avatar-team"), 116, 255, 240,120);
+    fill(232, 79, 79);
+    //umbrella moves with the mouse
+    rect(mouseX,mouseY,240,30);
+    normalText();
+    textSize(14);
+    fill(255, 255, 255);
+    text("This is an umbrella", mouseX + 120, mouseY + 13);
+    // Scoreboard
+    fill(237, 35, 193);
+    textSize(15);
+    textAlign(LEFT, TOP);
+    normalText();
+    text("Broken Hearts: " + heartBroken + "/50", 30,30);
+    text("Cold: " + floor(getCold/300) + "%", 30, 50);
+    text("Score: " + floor(time/1000), 300,30);
+    // Other text
+    textAlign(CENTER,CENTER);
+    // Warning when a condition is met.
+    normalText();
+    textSize(18);
+    if (heartBroken >= 50) {
+    text ("Oh!!!! You broke our hearts.", 200, 180);
+    }
+    if (floor(getCold/300) > 100) {
+    text ("Oouch, we've got a cold!", 200, 205);
+    }
+}
+};
+
+// Instruction
+background(217, 255, 0);
+textAlign(CENTER, CENTER);
+// Game name
+normalText();
+textSize(42);
+text("Under my Umbrella", 200,80);
+// the team
+image(getImage("avatars/avatar-team"), 102, 140);
+// Game rule
+textSize(14);
+fancyText();
+text("Try to catch as many heart as you can, \n but at the same time make sure \nyour team stay under your umbrella", 200,300);
+//Instruction 3
+f = createFont("fantasy");
+normalText();
+textSize(16);
+text("Press Enter to start/pause the game",200,350);
+
+// Execute game by Pressing Enter
+keyPressed = function() {
+    if (keyCode === 10) 
+    {
+       toggle = !toggle;
+    }
+}; 
+</script>
+</body>
+
+</html>
