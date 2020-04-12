@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">=
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Game: Under My Umbrella</title>
@@ -8,7 +7,7 @@
 
 <body>
     <canvas id="canvas1"></canvas>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js"> </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js"> </script>
     <script type="text/javascript">
         /* Game: Under My Umbrella
         It's rainy outside but it's also full of love. 
@@ -64,7 +63,7 @@
                 return (x < umbrellaX || x > umbrellaX + 240);
             };
 
-            provessing.draw = function () {
+            processing.draw = function () {
                 if (!toggle) {
                     return;
                 }
