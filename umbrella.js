@@ -121,11 +121,10 @@ function draw() {
         textSize(a * 12);
     }
     else {
-        background(255)
-        fill(0)
-        text(`UMBRELLA: ${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
-        console.log(`UMBRELLA: ${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`);
-        return
+        // background(255)
+
+        // console.log(`UMBRELLA: ${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`);
+        // return
         background(217, 255, 0);
         noStroke();
         for (var i = 0; (i < theRain.length) && (!outsideCanvas); i++) {
@@ -205,6 +204,8 @@ function draw() {
             text("Paused! \n Move your mouse back\n when you're ready", a * 200, a * 200)
         }
     }
+    fill(0)
+    text(`${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
 };
 // Execute game by Click 
 function mousePressed() {
