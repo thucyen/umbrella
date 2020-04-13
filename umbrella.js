@@ -14,7 +14,7 @@ class RainDrop {
         this.speed = random(5, 7);
     }
     drop() {
-        image(rain, this.x, this.y, 7 * a, 10 * a);
+        image(rain, this.x, this.y, 7 * a, 12 * a);
         this.y = this.y + this.speed * a;
 
 
@@ -51,7 +51,7 @@ function preload() {
     sad = loadImage('assets/sad.png');
     team = loadImage('assets/couple.png');
     heart = loadImage('assets/heart.png');
-    umbrella = loadImage('assets/umbrella.png');
+    umbrella = loadImage('assets/umbrella-new.png');
     right = loadImage('assets/right-arrow.png');
     left = loadImage('assets/left-arrow.png');
     rain = loadImage('assets/rain.png');
@@ -78,7 +78,7 @@ function draw() {
     umbrellaX = mouseX;
     umbrellaY = mouseY;
     if (!toggle) {
-        background(217, 255, 0);
+        background(98, 215, 198);
         textAlign(CENTER, CENTER);
         textSize(28 * a);
         textFont(normalFont);
@@ -125,7 +125,7 @@ function draw() {
 
         // console.log(`UMBRELLA: ${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`);
         // return
-        background(217, 255, 0);
+        background(98, 215, 198);
         noStroke();
         for (var i = 0; (i < theRain.length) && (!outsideCanvas); i++) {
             theRain[i].drop();
@@ -205,8 +205,7 @@ function draw() {
     }
     fill(0)
     //text(`${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
-    image(team, umbrellaX, umbrellaY, a * 200, a * 180);
-    rect(umbrellaX, umbrellaY, 20, 20);
+    image(umbrella, umbrellaX, umbrellaY, a * 200, a * 180);
 };
 // Execute game by Click 
 function mousePressed() {
