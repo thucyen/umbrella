@@ -75,6 +75,8 @@ function setup() {
     }
 }
 function draw() {
+    umbrellaX = mouseX;
+    umbrellaY = mouseY;
     if (!toggle) {
         background(217, 255, 0);
         textAlign(CENTER, CENTER);
@@ -119,6 +121,11 @@ function draw() {
         textSize(a * 12);
     }
     else {
+        background(255)
+        fill(0)
+        text(`UMBRELLA: ${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
+        console.log(`UMBRELLA: ${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`);
+        return
         background(217, 255, 0);
         noStroke();
         for (var i = 0; (i < theRain.length) && (!outsideCanvas); i++) {
@@ -217,15 +224,11 @@ function mouseMoved() {
     }
     else {
         outsideCanvas = false;
-        umbrellaX = mouseX;
-        umbrellaY = mouseY;
     }
 }
 function touchMoved() {
     umbrellaX = mouseX;
     umbrellaY = mouseY;
     fill(255);
-    text('touch is working', (a * 400) / 2, a * 400 + 20);
     return false;
-
 }
