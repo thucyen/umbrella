@@ -1,9 +1,9 @@
 let a = 1;
 let outsideUmbrella = function (x, umbrellaX) {
-    return (x < umbrellaX || x > umbrellaX + a * 200);
+    return (x < (umbrellaX - a * 100) || x > (umbrellaX - a * 100) + a * 200);
 };
 let catchHeart = function (x, y, umbrellaX, umbrellaY) {
-    return (x >= umbrellaX && x <= umbrellaX + a * 200 && (y - umbrellaY) <= a * 20 && (y - umbrellaY) >= 0)
+    return (x >= (umbrellaX - a * 100) && x <= (umbrellaX - a * 100) + a * 200 && (y - umbrellaY) <= a * 20 && (y - umbrellaY) >= 0)
 };
 
 // Define rain
@@ -11,7 +11,7 @@ class RainDrop {
     constructor() {
         this.x = a * 10 * floor(random(0, 40));
         this.y = a * 10 * random(0, 20);
-        this.speed = random(5, 7);
+        this.speed = random(4, 7);
     }
     drop() {
         image(rain, this.x, this.y, 7 * a, 12 * a);
@@ -24,15 +24,32 @@ class HeartDrop {
     constructor() {
         this.x = 20 + a * 5 * floor(random(0, 75));
         this.y = 30 + a * 60 * floor(random(60, 100));
-        this.speed = random([1, 2, 3, 4]);
+        this.speed = random([2, 3, 4]);
         this.size = a * 15;
     }
     drop() {
         image(heart, this.x, this.y, this.size, this.size);
-        this.y += 5 + this.speed * a;
+        this.y += 3 + this.speed * a;
+        if (this.x > 0 && this.x < a * 400) {
+            this.x += this.speed * a * 0.3;
+        }
+        else if (this.x >= a * 400) {
+            this.x = 5;
+        }
+
     }
 }
+class Sun {
+    constructor() {
+        this.x = -80 * a;
+        this.y = a * 70;
+    }
+    set() {
+        image(sun, this.x, this.y, a * 150, a * 150);
+        this.x += 5 * a / 30;
 
+    }
+}
 let theRain = [];
 let theHeart = [];
 let toggle = false;
@@ -47,6 +64,7 @@ let outsideCanvas = false;
 let button;
 let umbrellaX;
 let umbrellaY;
+let theSun;
 function preload() {
     sad = loadImage('assets/sad.png');
     team = loadImage('assets/couple.png');
@@ -55,6 +73,7 @@ function preload() {
     right = loadImage('assets/right-arrow.png');
     left = loadImage('assets/left-arrow.png');
     rain = loadImage('assets/rain.png');
+    sun = loadImage('assets/sun.gif');
     normalFont = loadFont('assets/animeace.ttf');
     fancyFont = loadFont('assets/type-font.ttf');
 }
@@ -73,6 +92,7 @@ function setup() {
     for (var numberheart = 0; numberheart < 5; numberheart++) {
         theHeart.push(new HeartDrop());
     }
+    theSun = new Sun();
 }
 function draw() {
     umbrellaX = mouseX;
@@ -98,7 +118,12 @@ function draw() {
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
         if (leftright === 2) {
-            text("The game will stop if you miss > 50 hearts \n and make them cold.  Let's ensure \n they are always warm & romantic!", a * 200, a * 320);
+            text("You'll lose if you either: \n - Miss 30 hearts AND let them be 100% cold. \n - break all 50 hearts. \n - if they are sick (150% cold).", a * 200, a * 320);
+            image(left, a * 20, a * 315, a * 20, a * 20);
+            image(right, a * 360, a * 315, a * 20, a * 20);
+        }
+        if (leftright === 3) {
+            text("Let's ensure \n they are always warm & romantic!", a * 200, a * 320);
             image(left, a * 20, a * 315, a * 20, a * 20);
         }
         textSize(a * 16);
@@ -109,24 +134,21 @@ function draw() {
         return;
     }
     // Check if game is over
-    if ((heartBroken >= 50 && floor(getCold / 300) > 100) || heartBroken >= 70) {
+    if ((heartBroken >= 30 && floor(getCold / 300) > 100) || heartBroken >= 50 || floor(getCold / 300) > 150) {
         //normalText();
-        fill(191, 88, 88);
+        fill(232, 79, 79);
         rect(a * 20, a * 0, a * 360, a * 400);
         image(sad, a * 100, a * 80, a * 200, a * 200);
-        fill(255, 250, 250);
+        fill(255);
         textSize(a * 30);
         text("GAME OVER", a * 200, a * 310);
         text("Your score: " + floor(time / 1000), a * 200, a * 350);
         textSize(a * 12);
     }
     else {
-        // background(255)
-
-        // console.log(`UMBRELLA: ${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`);
-        // return
         background(98, 215, 198);
         noStroke();
+        //image(sun, a * 200, a * 110, a * 150, a * 150);
         for (var i = 0; (i < theRain.length) && (!outsideCanvas); i++) {
             theRain[i].drop();
             time++;
@@ -155,6 +177,7 @@ function draw() {
             }
 
         }
+        theSun.set();
         // Part 2: HEART DROP
         for (var j = 0; j < (theHeart.length) && (!outsideCanvas); j++) {
             theHeart[j].drop();
@@ -172,11 +195,11 @@ function draw() {
 
 
         // Scoreboard
-        fill(237, 35, 193);
+        fill(232, 79, 79);
         textSize(a * 15);
         textAlign(LEFT, TOP);
         textFont(fancyFont);
-        text("Broken Hearts: " + heartBroken + "/50", a * 30, a * 30);
+        text("Broken Hearts: " + heartBroken + "/30", a * 30, a * 30);
         text("Cold: " + floor(getCold / 300) + "%", a * 30, a * 50);
         text("Score: " + floor(time / 1000), a * 300, a * 30);
         // Other text
@@ -194,6 +217,7 @@ function draw() {
         image(team, a * 110, a * 205, a * 200, a * 200);
         fill(232, 79, 79);
         //umbrella moves with the mouse
+        image(umbrella, umbrellaX - a * 100, umbrellaY, a * 200, a * 180);
         textFont(normalFont);
         textSize(a * 14);
         if (outsideCanvas) {
@@ -203,9 +227,7 @@ function draw() {
             text("Paused! \n Move your mouse back\n when you're ready", a * 200, a * 200)
         }
     }
-    fill(0)
-    //text(`${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
-    image(umbrella, umbrellaX, umbrellaY, a * 200, a * 180);
+
 };
 // Execute game by Click 
 function mousePressed() {
