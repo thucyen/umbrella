@@ -204,8 +204,8 @@ function draw() {
         }
     }
     fill(0)
-    text(`${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
-    image(umbrella, umbrellaX, umbrellaY, a * 200, a * 180);
+    //text(`${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
+    image(team, umbrellaX, umbrellaY, a * 200, a * 180);
     rect(umbrellaX, umbrellaY, 20, 20);
 };
 // Execute game by Click 
