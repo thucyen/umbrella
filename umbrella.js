@@ -71,13 +71,6 @@ function setup() {
     for (var numberheart = 0; numberheart < 5; numberheart++) {
         theHeart.push(new HeartDrop());
     }
-    button = createButton('click me');
-    button.position(19, 19);
-    button.mousePressed(startGame);
-
-}
-function startGame() {
-    toggle = !toggle;
 }
 function draw() {
     if (!toggle) {
@@ -222,5 +215,9 @@ function mouseMoved() {
     }
     else {
         outsideCanvas = false;
+    }
+    function touchMoved() {
+        fill(255, 0, 0)
+        rect(x, y, 10, 10);
     }
 }
