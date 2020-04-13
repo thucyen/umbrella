@@ -29,7 +29,7 @@ class HeartDrop {
     }
     drop() {
         image(heart, this.x, this.y, this.size, this.size);
-        this.y += 5 + this.speed;
+        this.y += 5 + this.speed * a;
     }
 }
 
@@ -217,7 +217,7 @@ function mouseMoved() {
         outsideCanvas = false;
     }
     function touchMoved() {
-        fill(255, 0, 0)
-        rect(x, y, 10, 10);
+        image(umbrella, mouseX, mouseY, a * 200, a * 180);
+        return false;
     }
 }
