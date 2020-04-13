@@ -194,7 +194,6 @@ function draw() {
         image(team, a * 110, a * 205, a * 200, a * 200);
         fill(232, 79, 79);
         //umbrella moves with the mouse
-        image(umbrella, umbrellaX, umbrellaY, a * 200, a * 180);
         textFont(normalFont);
         textSize(a * 14);
         if (outsideCanvas) {
@@ -204,8 +203,9 @@ function draw() {
             text("Paused! \n Move your mouse back\n when you're ready", a * 200, a * 200)
         }
     }
-    fill(0)
-    text(`${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
+    //fill(0)
+    //text(`${umbrellaX.toFixed(2)}, ${umbrellaY.toFixed(2)}`, 200, 10);
+    image(umbrella, umbrellaX, umbrellaY, a * 200, a * 180);
 };
 // Execute game by Click 
 function mousePressed() {
@@ -230,6 +230,5 @@ function mouseMoved() {
 function touchMoved() {
     umbrellaX = mouseX;
     umbrellaY = mouseY;
-    fill(255);
     return false;
 }
