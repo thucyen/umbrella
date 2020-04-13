@@ -45,6 +45,8 @@ let heart;
 let leftright = 0;
 let outsideCanvas = false;
 let button;
+let umbrellaX;
+let umbrellaY;
 function preload() {
     sad = loadImage('assets/sad.png');
     team = loadImage('assets/couple.png');
@@ -186,7 +188,7 @@ function draw() {
         image(team, a * 110, a * 205, a * 200, a * 200);
         fill(232, 79, 79);
         //umbrella moves with the mouse
-        image(umbrella, mouseX, mouseY, a * 200, a * 180);
+        image(umbrella, umbrellaX, umbrellaY, a * 200, a * 180);
         textFont(normalFont);
         textSize(a * 14);
         if (outsideCanvas) {
@@ -210,14 +212,20 @@ function mousePressed() {
     }
 };
 function mouseMoved() {
-    if ((mouseX > a * 400) || (mouseY > a * 400)) {
+    if ((mouseX > a * 400) || (mouseY > a * 400) || (mouseX < 0) || (mouseY < 0)) {
         outsideCanvas = true;
     }
     else {
         outsideCanvas = false;
+        umbrellaX = mouseX;
+        umbrellaY = mouseY;
     }
-    function touchMoved() {
-        image(umbrella, mouseX, mouseY, a * 200, a * 180);
-        return false;
-    }
+}
+function touchMoved() {
+    umbrellaX = mouseX;
+    umbrellaY = mouseY;
+    fill(255);
+    text('touch is working', (a * 400) / 2, a * 400 + 20);
+    return false;
+
 }
