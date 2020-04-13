@@ -44,7 +44,7 @@ let team;
 let heart;
 let leftright = 0;
 let outsideCanvas = false;
-
+let button;
 function preload() {
     sad = loadImage('assets/sad.png');
     team = loadImage('assets/couple.png');
@@ -63,7 +63,7 @@ function setup() {
     else {
         a = (windowWidth - 80) / 400;
     }
-    createCanvas(400 * a, 400 * a, a * 40, a * 40);
+    createCanvas(400 * a, 400 * a);
     for (var numberdrop = 0; numberdrop < a * 100; numberdrop++) {
         theRain.push(new RainDrop());
     }
@@ -71,9 +71,14 @@ function setup() {
     for (var numberheart = 0; numberheart < 5; numberheart++) {
         theHeart.push(new HeartDrop());
     }
+    button = createButton('click me');
+    button.position(19, 19);
+    button.mousePressed(startGame);
 
 }
-
+function startGame() {
+    toggle = !toggle;
+}
 function draw() {
     if (!toggle) {
         background(217, 255, 0);
