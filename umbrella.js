@@ -109,21 +109,25 @@ function draw() {
         textSize(a * 14);
         textFont(fancyFont);
         if (leftright === 0) {
-            text("Yen & Vu are a couple who love \n grocery shopping and live in Stockholm. \n The weather here is terrible.", a * 200, a * 320);
+            text("Yen & Nikola are a couple who live in \n Stockholm. They met in January when \n it's cold and dark.", a * 200, a * 320);
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
         if (leftright === 1) {
-            text("Vu uses his umbrella to protect them \n from the cold rain. He also uses it to \n catch hearts for Yen. How cute!", a * 200, a * 320);
-            image(left, a * 20, a * 315, a * 20, a * 20);
+            text("For some reason, Nikola gets cold and sad. \n Lucky for him Yen is here with her super power. \n She brings some sunshine too.", a * 200, a * 320);
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
         if (leftright === 2) {
-            text("You'll lose if you either: \n - Miss 30 hearts AND let them be 100% cold. \n - break all 50 hearts. \n - if they are sick (150% cold).", a * 200, a * 320);
+            text("Yen uses her umbrella to protect them \n from the cold rain. She also uses it to \n catch hearts for him. How cute!", a * 200, a * 320);
             image(left, a * 20, a * 315, a * 20, a * 20);
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
         if (leftright === 3) {
-            text("Let's ensure \n they are always warm & romantic!", a * 200, a * 320);
+            text("You'll lose if you either: \n - Miss 30 hearts AND let them be 100% cold. \n - break all 50 hearts. \n - if they are very cold (150% cold).", a * 200, a * 320);
+            image(left, a * 20, a * 315, a * 20, a * 20);
+            image(right, a * 360, a * 315, a * 20, a * 20);
+        }
+        if (leftright === 4) {
+            text("Let's try our best to ensure \n they are always warm & romantic!", a * 200, a * 320);
             image(left, a * 20, a * 315, a * 20, a * 20);
         }
         textSize(a * 16);
