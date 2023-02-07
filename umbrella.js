@@ -113,7 +113,7 @@ function draw() {
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
         if (leftright === 1) {
-            text("For some reason, Nikola gets cold and sad. \n Lucky for him Yen is here with her super power. \n She brings some sunshine too.", a * 200, a * 320);
+            text("For some reason, Nikola easily gets cold. \n Lucky for him Yen has her super power. \n She brings some sunshine too.", a * 200, a * 320);
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
         if (leftright === 2) {
@@ -122,7 +122,7 @@ function draw() {
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
         if (leftright === 3) {
-            text("You'll lose if you either: \n - Miss 30 hearts AND let them be 100% cold. \n - break all 50 hearts. \n - if they are very cold (150% cold).", a * 200, a * 320);
+            text("The game stops if you either: \n - Miss 30 hearts AND let them be 100% cold. \n - break all 50 hearts. \n - if they are very cold (150% cold).", a * 200, a * 320);
             image(left, a * 20, a * 315, a * 20, a * 20);
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
@@ -145,7 +145,7 @@ function draw() {
         image(sad, a * 100, a * 80, a * 200, a * 200);
         fill(255);
         textSize(a * 30);
-        text("GAME OVER", a * 200, a * 310);
+        text("We are home!", a * 200, a * 310);
         text("Your score: " + floor(time / 1000), a * 200, a * 350);
         textSize(a * 12);
     }
