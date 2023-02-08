@@ -122,7 +122,7 @@ function draw() {
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
         if (leftright === 3) {
-            text("The game stops if you either: \n - Miss 30 hearts AND let them be 100% cold. \n - break all 50 hearts. \n - if they are very cold (150% cold).", a * 200, a * 320);
+            text("The game stops if you either: \n - Miss 30 hearts AND let them be 80% cold. \n - break all 50 hearts. \n - if they freeze (100% cold).", a * 200, a * 320);
             image(left, a * 20, a * 315, a * 20, a * 20);
             image(right, a * 360, a * 315, a * 20, a * 20);
         }
@@ -138,7 +138,7 @@ function draw() {
         return;
     }
     // Check if game is over
-    if ((heartBroken >= 30 && floor(getCold / 300) > 100) || heartBroken >= 50 || floor(getCold / 300) > 150) {
+    if ((heartBroken >= 30 && floor(getCold / 400) > 80) || heartBroken >= 50 || floor(getCold / 400) > 100) {
         //normalText();
         fill(232, 79, 79);
         rect(a * 20, a * 0, a * 360, a * 400);
@@ -203,8 +203,8 @@ function draw() {
         textSize(a * 15);
         textAlign(LEFT, TOP);
         textFont(fancyFont);
-        text("Broken Hearts: " + heartBroken + "/30", a * 30, a * 30);
-        text("Cold: " + floor(getCold / 300) + "%", a * 30, a * 50);
+        text("Broken Hearts: " + heartBroken, a * 30, a * 30);
+        text("Cold: " + floor(getCold / 400) + "%", a * 30, a * 50);
         text("Score: " + floor(time / 1000), a * 300, a * 30);
         // Other text
         textAlign(CENTER, CENTER);
